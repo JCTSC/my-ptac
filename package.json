@@ -1,5 +1,5 @@
 {
-  "name": "my-ptac",
+  "name": "reserva",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,10 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "my-ptac": "file:",
     "next": "14.2.12",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "reserva": "file:"
   },
   "devDependencies": {
     "@types/node": "^20",
