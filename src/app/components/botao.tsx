@@ -1,6 +1,6 @@
 type ButtonProp = {
-    name: string
-    numero: number
+    name: string;
+    numero: number;
 }
 
 const Button: React.FC<ButtonProp> = ({name,numero}) => {
