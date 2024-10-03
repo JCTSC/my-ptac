@@ -1,14 +1,7 @@
 interface Usuario {
     nome: string;
-    idade: Number;
-    email: String;
+    idade: number;
+    email?: string;
 }
 
-const PerfilUsuaio:RecordingState.FC<{usuario: Usuario}>
-= ({usuario}) => {
-    return(
-        <div>
-            <h1></h1>
-        </div>
-    )
-}
+export default Usuario;

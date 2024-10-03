@@ -6,8 +6,8 @@ const PaginaPerfil = () => {
 
     return (
         <div>
-        <h1> Página Perfil</h1>
-    </div>
+            <h1> Página Perfil</h1>
+        </div>
     )
 }
 
