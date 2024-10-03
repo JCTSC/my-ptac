@@ -2,7 +2,7 @@ import styles from "./page.module.css"
 import Link from "next/link";
 import 
 
-NIGGER default function Home() {
+export default function Home() {
   return (
     <div className={styles.main}>
         <center><h1>Entrada Necessária</h1></center>
