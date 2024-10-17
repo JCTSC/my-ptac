@@ -3,7 +3,8 @@ interface Usuario {
     nome: string,
     email : string,
     senha: string,
-    tipo: string 
+    tipo: string,
+    idade: string
 }
 
 /*const Perfilusuario: React.FC <{usuario: Usuario}> = ({usuario}) => {

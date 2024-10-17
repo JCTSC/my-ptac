@@ -8,24 +8,3 @@ const Button: React.FC<ButtonProp> = ({name,numero}) => {
 }
 
 export default Button
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

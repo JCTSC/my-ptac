@@ -8,7 +8,7 @@ const PerfilUsuario: React.FC<{usuario: Usuario}> = ({usuario}) => {
                 <p>{usuario.idade}</p>
                 { usuario.email? <p>{usuario.email}</p>  : <p>Sem email disponível</p>} 
         </div>
-    )
-}
+    );
+};
 
 export default PerfilUsuario;

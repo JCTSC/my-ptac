@@ -2,6 +2,8 @@
 import styles from "../page.module.css";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -9,7 +11,7 @@ export default function Login() {
   const [error, setError] = useState('');
   const router = useRouter();
 
-  function verificarLogin(e) {
+  function verificarLogin(e: React.FormEvent) {
     e.preventDefault();
     if (email !== 'ptac4' || password !== 'nota10') {
       setError('E-mail ou senha inválidos');
@@ -35,6 +37,10 @@ export default function Login() {
 
           <p style={{color: "red"}}>{error}</p>
           <button type="submit" className={styles.link}>Login</button> 
+
+        <Link href="/cadastrar">
+        <p className="text-"> Me cadastrar </p>
+        </Link>
         </form>
       </div>
     </div>
