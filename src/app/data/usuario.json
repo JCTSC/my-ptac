@@ -1,0 +1,23 @@
+[
+    {
+        "id" : 1,
+        "nome": "Jéfferson",
+        "email": "omaislindo@gmail.com",
+        "password": "senha123",
+        "tipo": "adm"
+    },
+    {
+        "id" : 2,
+        "nome": "Bruninhu",
+        "email": "claramentebruno@gmail.com",
+        "password": "senha123",
+        "tipo": "cliente"
+    },
+    {
+        "id" : 3,
+        "nome": "Carlinhos",
+        "email": "simsim@gmail.com",
+        "password": "senha123",
+        "tipo": "cliente"
+    }
+]

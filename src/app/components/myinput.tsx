@@ -14,7 +14,7 @@ const MyInput: React.FC<MyInputProp> = ({valor, funcao}) => {
 /* 
 
 export default function Cadastro() {
-
+    
 
 }
 

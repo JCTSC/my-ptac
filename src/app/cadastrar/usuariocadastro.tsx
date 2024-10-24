@@ -1,0 +1,5 @@
+const alterarNome = (novoNome) => () {
+
+setUsuario
+
+}
