@@ -1,14 +1,31 @@
 'use client'
 import styles from "../page.module.css";
-import { useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Usuario from "../interface/usuario";
 import Link from "next/link";
+import { ApiUrl } from "../config"
 
 
-export default function Login() {
-  const [email, setEmail] = useState('');
-  const [senha, setSenha] = useState('');
-  const [error, setError] = useState('');
+
+  export default function Login() {
+  const [email, setEmail] = useState<string>('');
+  const [senha, setSenha] = useState<string>('');
+  const [error, setError] = useState<string>('');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   const [usuarios, setUsuarios] = useState<Usuario[]>([
     {
       id: 1,
@@ -26,7 +43,33 @@ export default function Login() {
     }
   ])
 
-  const router = useRouter();
+
+
+
+
+
+  const handleSubmit = async (e:FormEvent) => {
+    e.preventDefault();
+
+    const response = await fetch(`${ApiURL}/auth/login`, {
+      method: "POST",
+      headers: {
+        'Content-Type' : ' application/json'
+      },
+      body: JSON.stringify({email, password})
+    })
+
+
+
+
+
+
+
+
+
+
+
+const router = useRouter();
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -39,6 +82,18 @@ export default function Login() {
     }
   }
 
+
+
+
+
+
+
+
+
+
+
+
+
   function verificarLogin(e: React.FormEvent) {
     e.preventDefault();
     if (email !== 'ptac4' || senha !== 'nota10') {
@@ -46,31 +101,21 @@ export default function Login() {
       return;
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
     setError('');
     router.push('/')
   }
 
-  return (
-    <div className={styles.page}>
-      <div className={styles.main}>
-        <h2>Login</h2>
-        <form onSubmit={verificarLogin}>
-
-          <input type="text" 
-           onChange={(e) => setEmail(e.target.value)}
-           placeholder="Email" required className={styles.input}/>
-          <input type="password" 
-           onChange={(e) => setSenha(e.target.value)}
-           placeholder="Senha" required className={styles.input}/>
-
-          <p style={{color: "red"}}>{error}</p>
-          <button type="submit" className={styles.link}>Login</button> 
-
-        <Link href="/cadastrar">
-        <p className="text-"> Me cadastrar </p>
-        </Link>
-        </form>
-      </div>
-    </div>
-  );
 }
