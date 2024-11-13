@@ -1,78 +1,77 @@
-'use client'
+'use client';
 import styles from "../page.module.css";
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
-import Usuario from "../interface/usuario";
 import Link from "next/link";
-import { ApiURL } from "../config"
+import { ApiURL } from "../config";
+import { setCookie } from 'nookies';
 
-  export default function Login() {
+interface ResponseSignin {
+  erro: boolean;
+  mensagem: string;
+  token?: string;
+}
+
+export default function Login() {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string>('');
+  const router = useRouter();
 
-  interface ResponseSignin {
-    erro: boolean,
-    mensagem: string,
-    token?: string
-  }
-  
-      const handleSubmit = async (e : FormEvent) => {
-        e.preventDefault();
-        try {
-         const response = await fetch(`${ApiURL}/auth/login`, {
-          method: 'POST',
-          headers: {
-            'Content-Type' : 'application/json'
-          },
-          body: JSON.stringify({email, password})
-         })
-          if (response){
-            const data : ResponseSignin = await response.json()
-            const {erro, mensagem, token = ''} = data;
-            console.log(data)
-            if (erro){
-              setError(mensagem)
-            } else {
-              // npm i nookies setCookie
-              setCookie(undefined, 'restaurant-token', token, {
-                maxAge: 60*60*1 // 1 hora
-              } )
-  
-            }
-          } else {
-  
-          }
-      } 
-       catch (error) {
-      console.error('Erro na requisicao', error)
-    }
-  
-
-const router = useRouter();
-
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    const usuario = usuarios.find((user) => user.email == email && user.password == password)
-    if(usuario){
-      localStorage.setItem('usuario', JSON.stringify(usuario))
-      router.push('/home')
-    } else {
-      setError('Email ou password inválido!')
-    }
-  }
-
-
-  function verificarLogin(e: React.FormEvent) {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (email !== 'ptac4' || password !== 'nota10') {
-      setError('E-mail ou password inválidos');
-      return;
+    try {
+      const response = await fetch(`${ApiURL}/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (response.ok) {
+        const data: ResponseSignin = await response.json();
+        const { erro, mensagem, token = '' } = data;
+
+        if (erro) {
+          setError(mensagem);
+        } else {
+          setCookie(undefined, 'restaurant-token', token, {
+            maxAge: 60 * 60, 
+          });
+          router.push('/'); 
+        }
+      } else {
+        setError('Error during login request');
+      }
+    } catch (error) {
+      console.error('Request error:', error);
+      setError('An unexpected error occurred');
     }
+  };
 
-
-    setError('');
-    router.push('/')
-  }
-
+  return (
+    <div className={styles.container}>
+      <h1>Login</h1>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        {error && <p className={styles.error}>{error}</p>}
+        <button type="submit">Login</button>
+      </form>
+      <Link href="/cadastrar">Não tem uma conta, se regitra</Link>
+    </div>
+  );
 }
