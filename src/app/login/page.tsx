@@ -1,48 +1,110 @@
 'use client'
 import styles from "../page.module.css";
-import { useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Usuario from "../interface/usuario";
 import Link from "next/link";
+import { ApiURL } from "../config"
 
 
-export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const router = useRouter();
+  export default function Login() {
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [error, setError] = useState<string>('');
+
+
+
+
+  interface ResponseSignin {
+    erro: boolean,
+    mensagem: string,
+    token?: string
+  }
+  
+  
+  
+      const  handleSubmit = async (e : FormEvent) => {
+        e.preventDefault();
+        try {
+         const response = await fetch(`${ApiURL}/auth/login`, {
+          method: 'POST',
+          headers: {
+            'Content-Type' : 'application/json'
+          },
+          body: JSON.stringify({email, password})
+         })
+          if (response){
+            const data : ResponseSignin = await response.json()
+            const {erro, mensagem, token = ''} = data;
+            console.log(data)
+            if (erro){
+              setError(mensagem)
+            } else {
+              // npm i nookies setCookie
+              setCookie(undefined, 'restaurant-token', token, {
+                maxAge: 60*60*1 // 1 hora
+              } )
+  
+            }
+          } else {
+  
+          }
+      } 
+       catch (error) {
+      console.error('Erro na requisicao', error)
+    }
+  
+
+
+
+
+const router = useRouter();
+
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const usuario = usuarios.find((user) => user.email == email && user.password == password)
+    if(usuario){
+      localStorage.setItem('usuario', JSON.stringify(usuario))
+      router.push('/home')
+    } else {
+      setError('Email ou password inválido!')
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
 
   function verificarLogin(e: React.FormEvent) {
     e.preventDefault();
     if (email !== 'ptac4' || password !== 'nota10') {
-      setError('E-mail ou senha inválidos');
+      setError('E-mail ou password inválidos');
       return;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     setError('');
     router.push('/')
   }
 
-  return (
-    <div className={styles.page}>
-      <div className={styles.main}>
-        <h2>Login</h2>
-        <form onSubmit={verificarLogin}>
-
-          <input type="text" 
-           onChange={(e) => setEmail(e.target.value)}
-           placeholder="Email" required className={styles.input}/>
-          <input type="password" 
-           onChange={(e) => setPassword(e.target.value)}
-           placeholder="Senha" required className={styles.input}/>
-
-          <p style={{color: "red"}}>{error}</p>
-          <button type="submit" className={styles.link}>Login</button> 
-
-        <Link href="/cadastrar">
-        <p className="text-"> Me cadastrar </p>
-        </Link>
-        </form>
-      </div>
-    </div>
-  );
 }
