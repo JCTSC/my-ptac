@@ -4,6 +4,8 @@ interface Mesa {
     n_lugares: number;
 }
 
+export default Mesa
+
 /*const Perfilusuario: React.FC <{usuario: Usuario}> = ({usuario}) => {
     return (
         <div>
@@ -15,5 +17,3 @@ interface Mesa {
 }
 
 export default Perfilusuario*/
-
-export default Mesa

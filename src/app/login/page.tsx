@@ -6,14 +6,10 @@ import Usuario from "../interface/usuario";
 import Link from "next/link";
 import { ApiURL } from "../config"
 
-
   export default function Login() {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string>('');
-
-
-
 
   interface ResponseSignin {
     erro: boolean,
@@ -21,9 +17,7 @@ import { ApiURL } from "../config"
     token?: string
   }
   
-  
-  
-      const  handleSubmit = async (e : FormEvent) => {
+      const handleSubmit = async (e : FormEvent) => {
         e.preventDefault();
         try {
          const response = await fetch(`${ApiURL}/auth/login`, {
@@ -55,9 +49,6 @@ import { ApiURL } from "../config"
     }
   
 
-
-
-
 const router = useRouter();
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -72,35 +63,12 @@ const router = useRouter();
   }
 
 
-
-
-
-
-
-
-
-
-
-
-
   function verificarLogin(e: React.FormEvent) {
     e.preventDefault();
     if (email !== 'ptac4' || password !== 'nota10') {
       setError('E-mail ou password inválidos');
       return;
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     setError('');
