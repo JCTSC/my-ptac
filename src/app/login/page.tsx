@@ -1,3 +1,4 @@
+
 'use client';
 import styles from "../page.module.css";
 import { FormEvent, useState } from "react";
@@ -19,6 +20,7 @@ export default function Login() {
   const router = useRouter();
 
   const handleSubmit = async (e: FormEvent) => {
+    
     e.preventDefault();
     try {
       const response = await fetch(`${ApiURL}/auth/login`, {
@@ -42,11 +44,12 @@ export default function Login() {
           router.push('/'); 
         }
       } else {
-        setError('Error during login request');
+        setError('Erro durante login. Suas informações não estão presentes.');
       }
+
     } catch (error) {
       console.error('Request error:', error);
-      setError('An unexpected error occurred');
+      setError('Um erro inexperado ocorreu');
     }
   };
 
@@ -71,7 +74,7 @@ export default function Login() {
         {error && <p className={styles.error}>{error}</p>}
         <button type="submit">Login</button>
       </form>
-      <Link href="/cadastrar">Não tem uma conta, se regitra</Link>
+      <Link href="/cadastrar">Se não tem uma conta, registre-se</Link>
     </div>
   );
 }

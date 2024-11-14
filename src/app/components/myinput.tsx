@@ -1,33 +1,11 @@
 type MyInputProp = {
-    valor: string;
-    funcao : () => void
+    value: string
 }
 
-const MyInput: React.FC<MyInputProp> = ({valor, funcao}) => {
-
-    return(
-        <input value={valor} onChange={funcao}/> 
+const MyInput: React.FC<MyInputProp> = ({value}) => {
+    return (
+        <input value={value} placeholder="CICADA-3301" />
     )
-
-} 
-
-/* 
-
-export default function Cadastro() {
-    
-
 }
 
-
-
-
-const alterarNome = {novoNome : string } => {
-console.log{usuario}
-setUsuario((usuarioAnterior) => ({
-...usuarioAnterior,
-nome: novoNome
-    }))
-} 
-
-const router = useRouter();
-    */
+export default MyInput;
