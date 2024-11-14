@@ -55,26 +55,32 @@ export default function Login() {
 
   return (
     <div className={styles.container}>
-      <h1>Login</h1>
+     <center> <h1>Login</h1> </center>
+     <p></p>
+     <p></p>
+     <p></p>
+     <p></p>
       <form onSubmit={handleSubmit}>
-        <input
+      <center><input
           type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-        />
-        <input
+        /> </center>
+
+      <center>  <input
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
-        />
+        /> </center>
+
         {error && <p className={styles.error}>{error}</p>}
-        <button type="submit">Login</button>
+       <center> <button type="submit">Login</button> </center>
       </form>
-      <Link href="/cadastrar">Se não tem uma conta, registre-se</Link>
+    <center>  <Link href="/cadastrar">Se não tem uma conta, registre-se</Link> </center>
     </div>
   );
 }

@@ -16,17 +16,16 @@ export default function Login() {
       setError("Informações inexistentes ou faltando com o nosso regulamento.");
       return;
     }
-    
     setError("");
     router.push("/logado");
   }
 
   return (
     <> 
-      {/* <Header username="Victor Carvalho" /> */}
+      
     <div className="w-full h-screen flex justify-center items-center">
       <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-lg space-y-6">
-       <center><h2 className="text-3xl font-extrabold text-center text-gray-800 mb-6">Login</h2></center>
+        <h2 className="text-3xl font-extrabold text-center text-gray-800 mb-6">Login</h2>
         <form onSubmit={verificarLogin} className="space-y-4">
           
           <p className="text-red-500 text-sm">{error}</p>
