@@ -1,8 +1,7 @@
-"use client";
+'use client';
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -10,8 +9,12 @@ export default function Login() {
   const [error, setError] = useState("");
   const router = useRouter();
 
-  function verificarLogin(e: React.FormEvent) {
+  function verificarLogin(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (!email || !password) {
+      setError("Por favor, preencha todos os campos.");
+      return;
+    }
     if (email !== "a@gmail.com" || password !== "nota10") {
       setError("Informações inexistentes ou faltando com o nosso regulamento.");
       return;
@@ -22,27 +25,45 @@ export default function Login() {
 
   return (
     <> 
-      
-    <div className="w-full h-screen flex justify-center items-center">
-      <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-lg space-y-6">
-        <h2 className="text-3xl font-extrabold text-center text-gray-800 mb-6">Login</h2>
-        <form onSubmit={verificarLogin} className="space-y-4">
-          
-          <p className="text-red-500 text-sm">{error}</p>
-          <center><button type="submit" className="w-full py-2 bg-yellow-900 text-white text-lg font-medium rounded-lg hover:bg-yellow-600 transition duration-300">
+      <div className="w-full h-screen bg-gradient-to-r from-gray-800 to-gray-600 flex items-center justify-center">
+        <div className="w-full max-w-md p-10 bg-white rounded-xl shadow-xl transform transition duration-500 hover:scale-105">
+          <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Login</h2>
+          <form onSubmit={verificarLogin} className="space-y-6">
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 transition duration-300"
+            />
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 transition duration-300"
+            />
+            {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+            <center>
+              <button
+                type="submit"
+                className="w-full py-2 bg-yellow-900 text-white text-lg font-medium rounded-lg hover:bg-yellow-600 transition duration-300"
+              >
+                Entrar
+              </button>
+            </center>
+          </form>
+          <center>
+            <p className="mt-6 text-sm text-gray-600">
+              Não tem uma conta?{" "}
+              <Link href="/cadastrar" className="text-yellow-700 font-semibold hover:underline">
+  Cadastre-se
+</Link>
 
-            Criar Conta
-
-          </button></center>
-        </form>
-        
+            </p>
+          </center>
+        </div>
       </div>
-    </div>
     </>
   );
 }
-
-
-
-
-

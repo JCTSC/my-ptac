@@ -1,4 +1,3 @@
-
 'use client';
 import styles from "../page.module.css";
 import { FormEvent, useState } from "react";
@@ -19,8 +18,7 @@ export default function Login() {
   const [error, setError] = useState<string>('');
   const router = useRouter();
 
-  const handleSubmit = async (e: FormEvent) => {
-    
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const response = await fetch(`${ApiURL}/auth/login`, {
@@ -49,38 +47,42 @@ export default function Login() {
 
     } catch (error) {
       console.error('Request error:', error);
-      setError('Um erro inexperado ocorreu');
+      setError('Um erro inesperado ocorreu. Tente novamente mais tarde.');
     }
   };
 
   return (
     <div className={styles.container}>
-     <center> <h1>Login</h1> </center>
-     <p></p>
-     <p></p>
-     <p></p>
-     <p></p>
+      <center><h1>Login</h1></center>
       <form onSubmit={handleSubmit}>
-      <center><input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        /> </center>
-
-      <center>  <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        /> </center>
-
+        <center>
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            className={styles.input}
+          />
+        </center>
+        <center>
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            className={styles.input}
+          />
+        </center>
         {error && <p className={styles.error}>{error}</p>}
-       <center> <button type="submit">Login</button> </center>
+        <center>
+          <button type="submit" className={styles.button}>Login</button>
+        </center>
       </form>
-    <center>  <Link href="/cadastrar">Se não tem uma conta, registre-se</Link> </center>
+      <center>
+        <Link href="/cadastrar">Se não tem uma conta, registre-se</Link>
+      </center>
     </div>
   );
 }
