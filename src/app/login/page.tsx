@@ -29,7 +29,9 @@ export default function Login() {
         body: JSON.stringify({ email, password }),
       });
 
-      if (response.ok) {
+      console.log
+
+      if (response) {
         const data: ResponseSignin = await response.json();
         const { erro, mensagem, token = '' } = data;
 

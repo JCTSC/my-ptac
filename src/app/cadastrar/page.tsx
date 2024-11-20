@@ -27,22 +27,22 @@ export default function Login() {
     <> 
       <div className="w-full h-screen bg-gradient-to-r from-gray-800 to-gray-600 flex items-center justify-center">
         <div className="w-full max-w-md p-10 bg-white rounded-xl shadow-xl transform transition duration-500 hover:scale-105">
-          <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Login</h2>
+          <center><h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Cadastro</h2></center>
           <form onSubmit={verificarLogin} className="space-y-6">
-            <input
+          <center> <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email"
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 transition duration-300"
-            />
-            <input
+            /></center>
+         <center>   <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 transition duration-300"
-            />
+            /></center>
             {error && <p className="text-red-500 text-sm text-center">{error}</p>}
             <center>
               <button
@@ -57,9 +57,8 @@ export default function Login() {
             <p className="mt-6 text-sm text-gray-600">
               Não tem uma conta?{" "}
               <Link href="/cadastrar" className="text-yellow-700 font-semibold hover:underline">
-  Cadastre-se
-</Link>
-
+              Cadastre-se
+              </Link>
             </p>
           </center>
         </div>
