@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { setCookie } from "nookies"; // Biblioteca para manipular cookies
+import { setCookie } from "nookies";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -33,13 +33,13 @@ export default function Login() {
       if (data.erro) {
         setError(data.msg || "Erro ao fazer login. Tente novamente.");
       } else {
-        // Salva o token no cookie
+        
         setCookie(null, "restaurant-token", data.token, {
-          maxAge: 60 * 60, // 1 hora
-          path: "/", // Disponível em toda a aplicação
+          maxAge: 60 * 60, 
+          path: "/", 
         });
 
-        // Redireciona para a página inicial
+        
         router.push("/");
       }
     } catch (err) {
@@ -50,10 +50,10 @@ export default function Login() {
 
   return (
     <>
-      <div className="w-full h-screen bg-gradient-to-r from-gray-800 to-gray-600 flex items-center justify-center">
-        <div className="w-full max-w-md p-10 bg-white rounded-xl shadow-xl transform transition duration-500 hover:scale-105">
+      <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-md">
           <center>
-            <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Login</h2>
+            <h2 className="text-2xl font-bold text-center text-teal-700">Login</h2>
           </center>
           <form onSubmit={handleLogin} className="space-y-6">
             <center>
