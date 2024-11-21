@@ -51,11 +51,11 @@ export default function Login() {
 
   return (
     <>
-      <div className="Login">
-      <div className="LoginBox">
-          <div className="LoginHeader">
-            Login
-          </div>
+      <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-md">
+          <center>
+            <h2 className="text-2xl font-bold text-center text-teal-700">Login</h2>
+          </center>
           
           <form onSubmit={handleLogin} className="space-y-6">
             <center>
@@ -80,8 +80,8 @@ export default function Login() {
             <center>
               <button
                 type="submit"
-                className="w-full py-2 bg-yellow-900 text-white text-lg font-medium rounded-lg hover:bg-yellow-600 transition duration-300"
-              >
+                className="sw-full py-2 bg-yellow-900 text-white text-lg font-medium rounded-lg hover:bg-yellow-600 transition duration-300"
+              > 
                 Entrar
               </button>
             </center>
