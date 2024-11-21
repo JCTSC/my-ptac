@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { setCookie } from "nookies";
+import "../page.module.css";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -50,11 +51,12 @@ export default function Login() {
 
   return (
     <>
-      <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-md">
-          <center>
-            <h2 className="text-2xl font-bold text-center text-teal-700">Login</h2>
-          </center>
+      <div className="Login">
+      <div className="LoginBox">
+          <div className="LoginHeader">
+            Login
+          </div>
+          
           <form onSubmit={handleLogin} className="space-y-6">
             <center>
               <input

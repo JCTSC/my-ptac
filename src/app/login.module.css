@@ -1,37 +1,10 @@
-/* Centraliza o contêiner principal */
-body {
-    font-family: 'Inter', sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  /* Animação de hover para o formulário */
-  form:hover {
-    transform: scale(1.02);
-    transition: transform 0.2s ease-in-out;
-  }
-  
-  /* Fundo gradiente adicional */
-  .bg-gradient-custom {
-    background: linear-gradient(135deg, #4a5568, #2d3748);
-  }
-  
-  /* Foco customizado para inputs */
-  input:focus {
-    outline: none;
-    box-shadow: 0 0 5px 2px rgba(234, 179, 8, 0.5); /* Amarelo brilhante */
-  }
-  
-  /* Botão de login */
-  button:hover {
-    background-color: #d69e2e; /* Transição para um amarelo mais claro */
-    cursor: pointer;
-  }
-  
-  /* Link sublinhado em hover */
-  a:hover {
-    text-decoration: underline;
-    color: #d69e2e;
-  }
-  
+.login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.LoginBox{
+    width: 350px;
+    height: 400px;
+    background-color: aqua;
+}
