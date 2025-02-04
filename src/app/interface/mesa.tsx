@@ -1,5 +1,5 @@
 interface Mesa {
-    id: number,
+    id?: number,
     codigo: string,
     n_lugares: number
 }

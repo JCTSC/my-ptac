@@ -2,56 +2,71 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Usuario from "../interface/usuario";
+import { ApiURL } from "../config";
+import ResponseSignin from "../interface/response";
+import { setCookie } from "nookies";
 
 export default function Cadastrar() {
-  const [nome, setNome] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
+  const [usuario, setUsuario] = useState<Usuario>({
+    nome: '',
+    email: '',
+    password: '',
+    tipo: 'cliente'
+  });
+  const [msgError, setMsgError] = useState<string | null>(null);
   const router = useRouter();
 
   async function handleRegister(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setError("");
-    setSuccess("");
 
-    if (!nome || !email || !password || !confirmPassword) {
-      setError("Por favor, preencha todos os campos.");
-      return;
-    }
-
-    if (nome.length < 6) {
-      setError("O nome deve ter no mínimo 6 caracteres.");
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      setError("As senhas não coincidem.");
-      return;
-    }
-
-    try {
-      const response = await fetch("http://localhost:8000/auth/cadastrar", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ nome, email, password }),
-      });
-
-      const data = await response.json();
-      if (data.erro) {
-        setError(data.msg || "Erro ao cadastrar usuário.");
+    const response = await fetch(`${ApiURL}/auth/cadastro`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(usuario)
+    })
+    if (response) {
+      const data: ResponseSignin = await response.json()
+      const { erro, mensagem, token = '' } = data;
+      console.log(data)
+      if (erro) {
+        setMsgError(mensagem)
       } else {
-        setSuccess("Cadastro realizado com sucesso!");
-        setTimeout(() => router.push("/login"), 2000);
+        setCookie(undefined, 'restaurant-token', token, {
+          maxAge: 60 * 60 * 1 // 1 hora
+        })
+        router.push('/')
       }
-    } catch (err) {
-      console.error("Erro no cadastro:", err);
-      setError("Ocorreu um erro inesperado. Tente novamente.");
+    } else {
+      setMsgError("Resposta não respondida");
     }
+
+    // Aqui você pode adicionar lógica para enviar os dados para o seu backend
+    console.log('Usuário cadastrado:', usuario);
+  }
+
+  const alterarNome = (novoNome: string) => {
+
+    setUsuario((usuarioAnterior) => ({
+      ...usuarioAnterior,
+      nome: novoNome
+    }));
+  }
+
+  const alterarEmail = (novoEmail: string) => {
+    setUsuario((usuarioAnterior) => ({
+      ...usuarioAnterior,
+      email: novoEmail
+    }));
+  }
+
+  const alterarPassword = (novoPassword: string) => {
+    setUsuario((usuarioAnterior) => ({
+      ...usuarioAnterior,
+      password: novoPassword
+    }));
   }
 
   return (
@@ -63,8 +78,8 @@ export default function Cadastrar() {
             <center>
               <input
                 type="text"
-                value={nome}
-                onChange={(e) => setNome(e.target.value)}
+                value={usuario.nome}
+                onChange={(e) => alterarNome(e.target.value)}
                 placeholder="Nome completo"
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 transition duration-300"
               />
@@ -72,8 +87,8 @@ export default function Cadastrar() {
             <center>
               <input
                 type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={usuario.email}
+                onChange={(e) => alterarEmail(e.target.value)}
                 placeholder="Email"
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 transition duration-300"
               />
@@ -81,23 +96,13 @@ export default function Cadastrar() {
             <center>
               <input
                 type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={usuario.password}
+                onChange={(e) => alterarPassword(e.target.value)}
                 placeholder="Senha"
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 transition duration-300"
               />
             </center>
-            <center>
-              <input
-                type="password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                placeholder="Confirme sua senha"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 transition duration-300"
-              />
-            </center>
-            {error && <p className="text-red-500 text-sm text-center">{error}</p>}
-            {success && <p className="text-green-500 text-sm text-center">{success}</p>}
+            {msgError && <p className="text-red-500 text-sm text-center">{msgError}</p>}
             <center>
               <button
                 type="submit"
