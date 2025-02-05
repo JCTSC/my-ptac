@@ -1,7 +1,23 @@
 {
+  "name": "reserva",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
   "dependencies": {
-    "cookies": "^0.9.1",
-    "next": "^15.1.6",
-    "nookies": "^2.5.2"
+    "next": "14.2.12",
+    "nookies": "^2.5.2",
+    "react": "^18",
+    "react-dom": "^18",
+    "reserva": "file:"
+  },
+  "devDependencies": {
+    "@types/node": "20.17.6",
+    "@types/react": "18.3.12",
+    "@types/react-dom": "^18",
+    "typescript": "5.7.3"
   }
 }
